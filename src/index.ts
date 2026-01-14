@@ -19,7 +19,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(morgan('combined'));
 
 // Health check endpoint
-app.get('/health', (req, res) => {
+app.get('/health', (_, res) => {
   res.status(200).json({
     status: 'ok',
     timestamp: new Date().toISOString(),
@@ -31,7 +31,7 @@ app.get('/health', (req, res) => {
 app.use('/api/turn', turnRoutes);
 
 // Root endpoint
-app.get('/', (req, res) => {
+app.get('/', (_, res) => {
   res.json({
     message: 'TURN Server API',
     version: '1.0.0',
@@ -43,7 +43,7 @@ app.get('/', (req, res) => {
 });
 
 // 404 handler
-app.use((req, res) => {
+app.use((_, res) => {
   res.status(404).json({
     error: 'Not Found',
     message: 'The requested resource does not exist',
@@ -51,7 +51,7 @@ app.use((req, res) => {
 });
 
 // Error handler
-app.use((err: Error, req: express.Request, res: express.Response, next: express.NextFunction) => {
+app.use((err: Error, _: express.Request, res: express.Response, _: express.NextFunction) => {
   console.error('Error:', err);
   res.status(500).json({
     error: 'Internal Server Error',

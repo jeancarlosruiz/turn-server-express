@@ -43,7 +43,7 @@ export const getTurnCredentials = async (req: Request, res: Response): Promise<v
 /**
  * Get TURN server configuration info
  */
-export const getTurnConfig = async (req: Request, res: Response): Promise<void> => {
+export const getTurnConfig = async (_: Request, res: Response): Promise<void> => {
   try {
     const config = {
       realm: process.env.TURN_REALM || 'turn.example.com',
