@@ -48,11 +48,11 @@ RUN chmod +x /start.sh
 RUN mkdir -p /var/log /var/lib/turn
 
 # Expose ports
-# 3000 - Express API
+# 3000 - Express API (Railway lo expone automáticamente)
 # 3478 - TURN server (UDP/TCP)
 # 5349 - TURN server (TLS)
-# 49152-65535 - TURN relay ports range
-EXPOSE 3000 3478 5349 49152-65535/udp 49152-65535/tcp
+# 50000-50100 - TURN relay ports range (optimizado para Railway)
+EXPOSE 3000 3478 5349 50000-50100/udp 50000-50100/tcp
 
 # Health check
 HEALTHCHECK --interval=30s --timeout=10s --start-period=40s --retries=3 \
