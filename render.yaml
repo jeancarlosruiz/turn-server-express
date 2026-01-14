@@ -1,0 +1,35 @@
+services:
+  - type: web
+    name: turn-server-express
+    runtime: docker
+    plan: starter
+    region: oregon
+    branch: main
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3000
+      - key: TURN_PORT
+        value: 3478
+      - key: TURN_TLS_PORT
+        value: 5349
+      - key: TURN_REALM
+        sync: false
+      - key: TURN_STATIC_AUTH_SECRET
+        generateValue: true
+        sync: false
+      - key: EXTERNAL_IP
+        sync: false
+    
+    # Health check endpoint
+    healthCheckPath: /health
+    
+    # Disk for logs and persistence
+    disk:
+      name: data
+      mountPath: /var/log
+      sizeGB: 1
